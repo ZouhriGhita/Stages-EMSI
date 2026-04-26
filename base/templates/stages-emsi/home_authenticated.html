@@ -6,6 +6,10 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Bienvenue dans Stages EMSI</h1>
+        {% extends 'stages-emsi/base.html' %}
+{% block content %}
+<h1>Bienvenue {{ user.username }}</h1>
+
+{% endblock %}
 </body>
 </html>
