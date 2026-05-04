@@ -20,5 +20,8 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('base.urls')),
-    path('etudiants/', include('étudiant.urls')), # Préfixe pour l'app étudiant
+    path('etudiants/', include('étudiant.urls')),
+    path('encadrant/', include('encadrant.urls')),
+    path('suivi/', include('suivi.urls')),
+    path('absence/', include('absence.urls')),
 ]
