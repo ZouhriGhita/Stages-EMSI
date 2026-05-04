@@ -1,0 +1,11 @@
+{% extends 'stages-emsi/base.html' %}
+
+{% block content %}  
+<div class="bg-light p-5 rounded-lg m-3 border">
+    <h1 class="display-4">Bienvenue dans Stages EMSI</h1>
+    <p class="lead">Plateforme de recherche scientifique et de gestion des stages.</p>
+    <hr class="my-4">
+    <p>Pour accéder à votre espace de gestion et consulter les dossiers, veuillez vous identifier.</p>
+    <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Se connecter</a>
+</div>
+{% endblock %}

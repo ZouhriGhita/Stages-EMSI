@@ -1,15 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-        {% extends 'stages-emsi/base.html' %}
-{% block content %}
-<h1>Bienvenue {{ user.username }}</h1>
+{% extends 'stages-emsi/base.html' %}
 
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Espace personnel : {{ user.username }}</h1>
+    
+    <div class="row">
+        {# --- VUE ADMINISTRATEUR (SUPERUSER) --- #}
+        {% if user.is_superuser %}
+        <div class="col-md-4 mb-3">
+            <div class="card border-primary h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">Administration Système</h5>
+                    <p class="card-text">Accès complet à la base de données, gestion des permissions et logs techniques.</p>
+                    <a href="/admin/" class="btn btn-primary">Panel Admin</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {# --- VUE PROFESSEUR / ENCADRANT (STAFF) --- #}
+        {% if user.is_staff %}
+        <div class="col-md-4 mb-3">
+            <div class="card border-info h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-info">Gestion Étudiants</h5>
+                    <p class="card-text">Consultez la liste des étudiants ou ajoutez de nouveaux profils.</p>
+                    <a href="{% url 'liste_etudiants' %}" class="btn btn-info text-white">Voir les étudiants</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card border-success h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-success">Encadrants</h5>
+                    <p class="card-text">Accédez à la liste des encadrants et leurs domaines d'études.</p>
+                    <a href="#" class="btn btn-success">Voir les encadrants</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {# --- VUE ÉTUDIANT (UTILISATEUR STANDARD) --- #}
+        {% if not user.is_staff and not user.is_superuser %}
+        <div class="col-md-6 mb-3">
+            <div class="card border-warning h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-warning">Mon Espace Étudiant</h5>
+                    <p class="card-text">Consultez vos informations personnelles, votre encadrant assigné et l'état de votre dossier de stage.</p>
+                    <a href="#" class="btn btn-warning text-white">Accéder à mon dossier</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
-</body>
-</html>
